@@ -4,6 +4,7 @@
 
 ```php
 composer up
+php artisan migrate --seed
 ```
 
 После этого создаем БД и изменяем конфиги в `app/config/local/database.php`
