@@ -1,0 +1,65 @@
+<div class="container">
+
+    <div ng-include="'components/navbar/navbar.html'"></div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <h1>Список задач</h1>
+
+            <form class="form-inline" ng-submit="search($event)">
+                <select name="payer_group" class="form-control">
+                    <option value="12">1 и 2 группы</option>
+                    <option value="35">3 и 5 группы</option>
+                    <option value="46">4 и 6 группы</option>
+                </select>
+                <input type="text" class="form-control" name="year" placeholder="2014"/>
+                <select ng-change="changePeriod($event)" ng-model="period" name="period" class="form-control">
+                    <option value="1q">1 квартал</option>
+                    <option value="2q">2 квартал</option>
+                    <option value="3q">3 квартал</option>
+                    <option value="4q">4 квартал</option>
+                    <option disabled></option>
+                    <option value="01">январь</option>
+                    <option value="02">февраль</option>
+                    <option value="03">март</option>
+                    <option value="04">апрель</option>
+                    <option value="05">май</option>
+                    <option value="06">июнь</option>
+                    <option value="07">июль</option>
+                    <option value="08">август</option>
+                    <option value="09">сентябрь</option>
+                    <option value="10">октябрь</option>
+                    <option value="11">ноябрь</option>
+                    <option value="12">декабрь</option>
+                </select>
+                <input type="text" class="form-control" name="date_from" placeholder="От"
+                       datepicker-popup="{{ format }}" ng-model="from" ng-click="openDatepickerFrom($event)"
+                       is-open="openedDatepickerFrom"/>
+                <input type="text" class="form-control" name="date_to" placeholder="До" datepicker-popup="{{ format }}"
+                       ng-model="to" ng-click="openDatepickerTo($event)" is-open="openedDatepickerTo"/>
+                <select name="language" class="form-control">
+                    <option value="ru">Русский</option>
+                    <option value="ua">Українська</option>
+                </select>
+                <input type="submit" class="btn btn-primary" value="Поиск"/>
+            </form>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Тип</th>
+                    <th>Группа плательщика</th>
+                    <th>Описание задачи</th>
+                </tr>
+
+                <tr ng-repeat="task in tasks">
+                    <th>{{ task.id }}</th>
+                    <td class="col-lg-4">{{ task.type.title }}</td>
+                    <td class="col-lg-3">{{ task.payer_group.description}}</td>
+                    <td class="col-lg-5">{{ task.descriptions[0].description}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
